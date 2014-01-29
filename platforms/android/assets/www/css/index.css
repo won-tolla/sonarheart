@@ -1,0 +1,151 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+@font-face {
+    font-family: 'Oswald Regular';
+    src: local('Oswald Regular'), url('../fonts/Oswald-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'BauerBodni BT';
+    src: local('BauerBodni BT'), url('../fonts/bauerb.ttf') format('truetype');
+}
+
+#labelHeader {
+	font-family:"BauerBodni BT";
+	color: red;
+	background-color: white;
+}
+.digits, #name1, #name2 {
+	font-family:"Oswald Regular";
+}
+ 
+#main {
+	width: 100%;
+	height: 100%;
+}
+#game table {
+	height: 100%;
+	width: 100%;
+	border-collapse: collapse;
+	background-image: url("../images/heart1.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 50%;
+}
+
+#hours, #name1, #years {
+	text-align: left;
+	padding-left: 10px;
+}        
+#seconds, #name2, #days {
+	text-align: right;
+	padding-right: 10px;
+}
+#years, #months, #days {
+	vertical-align: top;
+}
+#hours, #minutes, #seconds {
+	vertical-align: bottom;
+}
+#months, #minutes {
+	text-align: center;
+}
+#header {
+	height: 1%;
+}
+#game {
+	height: 99%;
+}
+#message1, #message2 {
+	font-size: 2em;
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+}
+
+@-webkit-keyframes myfade {
+    50% { color: red;}
+}
+@keyframes myfade {
+    50% { color: red;}
+}
+.t1 {
+    animation:myfade 3000ms infinite;
+    animation-delay:0000ms;
+    -webkit-animation:myfade 3000ms infinite;
+    -webkit-animation-delay:0000ms;
+}
+.t2 {
+    animation:myfade 3000ms infinite;
+    animation-delay:500ms;
+    -webkit-animation:myfade 3000ms infinite;
+    -webkit-animation-delay:500ms;
+}
+.t3 {
+    animation:myfade 3000ms infinite;
+    animation-delay:1000ms;
+    -webkit-animation:myfade 3000ms infinite;
+    -webkit-animation-delay:1000ms;
+}
+.t4 {
+    animation:myfade 3000ms infinite;
+    animation-delay:1500ms;
+    -webkit-animation:myfade 3000ms infinite;
+    -webkit-animation-delay:1500ms;
+}
+.t5 {
+    animation:myfade 3000ms infinite;
+    animation-delay:2000ms;
+    -webkit-animation:myfade 3000ms infinite;
+	-webkit-animation-delay:2000ms;
+}
+.t6 {
+    animation:myfade 3000ms infinite;
+    animation-delay:2500ms;
+	-webkit-animation:myfade 3000ms infinite;
+    -webkit-animation-delay:2500ms;
+}
+.white {
+	background-color: white;
+	color: black;
+}
+.black {
+	background-color: black;
+	color: white;
+}
+
+
+@keyframes animpulse
+{
+	0%   {background-size: 30%;}
+	50%   {background-size: 90%;}
+	100%   {background-size: 30%;}
+}
+
+@-webkit-keyframes animpulse /* Safari and Chrome */
+{
+	0%   {background-size: 30%;}
+	50%   {background-size: 90%;}
+	100%   {background-size: 30%;}
+}
+
+.pulse {
+ 	animation: animpulse 2s infinite;
+	-webkit-animation: animpulse 2s infinite; /* Safari and Chrome */
+}
