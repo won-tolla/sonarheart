@@ -51,8 +51,10 @@
 	<div style="padding:10px 20px;">
 		<h3 id="labelStart">Please sign in</h3>
 		<div id="intro"></div>
-		<label for="name" class="ui-hidden-accessible" id="labelName">Your name:</label>
-		<input type="text" name="name" id="name" value="" placeholder="Your name" data-theme="a">
+		<label for="start_name1" class="ui-hidden-accessible" id="labelName">Your name:</label>
+		<input type="text" name="start_name1" id="start_name1" value="" placeholder="Your name" data-theme="a">
+		<label for="start_name2" class="ui-hidden-accessible" id="labelName">Your name:</label>
+		<input type="text" name="start_name2" id="start_name2" value="" placeholder="Her/His name" data-theme="a">
 		<label for="secret_word" class="ui-hidden-accessible" id="labelSecretWord">Your secret word:</label>
 		<input type="text" name="secret_word" id="secret_word" value="" placeholder="Your secret word" data-theme="a">
 	 <a id="popupStartCancel" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="c">Cancel</a>
@@ -343,9 +345,11 @@
 <div data-role="popup" id="popupMenu" data-theme="d">
 	<ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">
 		<li data-role="divider" data-theme="e" id="labelMenu">Choose an action</li>
+		<li><a id="menuForever" data-rel="popup" data-position-to="window">Forever</a></li>
 		<li><a id="menuSetup" href="#popupSetup" data-rel="popup" data-position-to="window">Set time</a></li>
 		<li><a id="menuMessage" href="#popupMessage" data-rel="popup" data-position-to="window">Set message</a></li>
 		<li><a id="menuStop" data-rel="popup" data-position-to="window">Stop</a></li>
+		<li><a id="menuReset" data-rel="popup" data-position-to="window">Reset</a></li>
 	</ul>
 </div>    
 

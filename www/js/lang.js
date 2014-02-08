@@ -19,6 +19,9 @@ var languages = {
 		menuStop: 'Stop',
 		menuSetup: 'Imposta tempo',
 		menuMessage: 'Scrivi messaggio',
+		menuStart: 'Start',
+		menuDemo: 'Demo',
+		menuForever: 'Per sempre',
 		
 		labelMenu: 'Scegli una azione',
 		
@@ -26,11 +29,20 @@ var languages = {
 		invalidConnect: 'Connessione non riuscita',
 		breakConnect: "ATTENZIONE!!!\nVuoi interrompere il conteggio?\nQuesta operazione e' irreversibile.",
 		failConnection: 'Impossibile connetersi alla rete',
+		notEnabled: 'DEMO: funzione none abilitata',
+		forever: "PER SEMPRE?\nQuesta operazione e' irreversibile.",
 		
 		intro: "SonarHeart conta il nostro tempo."
 			+"<br>Per avviarlo bisogna essere in due."
 			+" Ognuno scrive il proprio nome ed una parola segreta uguale per entrambi."
-			+" Insieme premiamo il pulsante Start."
+			+" Insieme premiamo il pulsante Start.",
+		
+		messages: [
+		           "TVTB",
+		           "TI LOVVO",
+		           "QUANTO MI MANCHI",
+		           "STAREMO INSIEME PER SEMPRE"
+		]
 	},
 	en_US: {
 		slogan: 'How to say I love you every second?',
@@ -52,6 +64,9 @@ var languages = {
 		menuStop: 'Stop',
 		menuSetup: 'Set timer',
 		menuMessage: 'Write message',
+		menuStart: 'Start',
+		menuDemo: 'Demo',
+		menuForever: 'Forever',
 		
 		labelMenu: 'Choice an action',
 		
@@ -59,14 +74,23 @@ var languages = {
 		invalidConnect: 'Invalid connection',
 		breakConnect: "WARNING!!!\nVuoi interrompere il conteggio?\nQuesta operazione e' irreversibile.",
 		failConnection: 'Fail connection',
+		notEnabled: 'DEMO: funzione none abilitata',
+		forever: "PER SEMPRE?\nQuesta operazione e' irreversibile.",
 		
 		intro: "SonarHeart count our time."
 			+"<br>To start you need to be in two."
 			+" Everyone writes their name and a secret word the same for both."
-			+" Together we press the Start button."
+			+" Together we press the Start button.",
+		
+		messages: [
+		           "TVTB",
+		           "TI LOVVO",
+		           "QUANTO MI MANCHI",
+		           "STAREMO INSIEME PER SEMPRE"
+		]
 	}
 };
-var lang = languages.en_US;
+var lang = languages.it_IT;
 
 document.addEventListener("deviceready", setLocale, false);
 function setLocale() {

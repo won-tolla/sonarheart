@@ -7,7 +7,7 @@ var secondsRefresh = 60;
 var id = null;
 var name1 = '';
 var name2 = '';
-var set_time = 0;
+var status = 0;
 var date_start = null;
 var date_end = null;
 var message1 = '';	
@@ -57,7 +57,42 @@ $(document).on("pageinit",function() {
 			});
 		}
 	});
+
+	$("#menuReset").on("tap", function() {
+		$("#popupMenu").popup( "close" );
+		if (checkConnection(true) && confirm(lang.reset)) {
+			$.ajax({
+				data: {
+					id: id,
+					action: 'reset',
+					now: now()
+				}
+			}).done(function(data){
+				setData(data);
+			}).fail(function() {
+				failConnection();
+			});
+		}
+	});
 	
+	
+	$("#menuForever").on("tap", function() {
+		$("#popupMenu").popup( "close" );
+		if (checkConnection(true) && confirm(lang.forever)) {
+			$.ajax({
+				data: {
+					id: id,
+					action: 'forever',
+					now: now()
+				}
+			}).done(function(data){
+				setData(data);
+			}).fail(function() {
+				failConnection();
+			});
+		}
+	});
+
 	$("#heart").on("taphold", doMenu);
 	
 	// start
@@ -70,7 +105,8 @@ $(document).on("pageinit",function() {
    			bConnecting = true;
 			$.ajax({
 				data: {
-					name: $("#name").val(),
+					name1: $("#start_name1").val(),
+					name2: $("#start_name2").val(),
 					secretWord: $("#secret_word").val(),
 					action: 'start',
 					now: now(),
@@ -124,7 +160,7 @@ $(document).on("pageinit",function() {
 	});
 	$("#popupSetupOk").on("tap", function() {
 		$("#popupSetup").popup( "close" );
-   		if(checkConnection(true) && confirm(lang.setupConfirm)) {
+		if(checkConnection(true) && confirm(lang.setupConfirm)) {
 			$.ajax({
 				data: {
 					id: id,
@@ -151,7 +187,7 @@ $(document).on("pageinit",function() {
 	});
 	$("#popupMessageOk").on("tap", function() {
 		$("#popupMessage").popup( "close" );
-   		if(checkConnection(true)) {
+		if(checkConnection(true)) {
 			$.ajax({
 				data: {
 					id: id,
@@ -178,7 +214,6 @@ function pad(number) {
 var interval = 0;
 function pulse() {
 	var d2 = new Date;
-	var image = "heart0.png";
 	
 	if( date_start == null ) {
 		$("#years").removeClass("t1");
@@ -269,7 +304,8 @@ function pulse() {
 		}
 		if( id == null ) {
 			setTimeout(function () {
-				$("#popupStart").popup("open");
+//				$("#popupStart").popup("open");
+				doMenu();
 			}, 100);
 		}
 	} else if(id != null) {
@@ -306,7 +342,7 @@ function loadConfig() {
 											if(arr.length>0 && arr[0]!='') id = arr[0];
 											if(arr.length>1) name1 = arr[1];
 											if(arr.length>2) name2 = arr[2];
-											if(arr.length>3) set_time = parseInt(arr[3]);
+											if(arr.length>3) status = parseInt(arr[3]);
 											if(arr.length>4 && arr[4]!="") date_start = new Date(arr[4]);
 											if(arr.length>5 && arr[5]!="") date_end = new Date(arr[5]);
 											if(arr.length>6) message1 = arr[6];
@@ -351,7 +387,7 @@ function saveConfig() {
 								        	(id ? id : "")
 							        		+"|"+name1
 							        		+"|"+name2
-							        		+"|"+set_time
+							        		+"|"+status
 							        		+"|"+(date_start ? date_start.toGMTString() : "")
 							        		+"|"+(date_end ? date_end.toGMTString() : "")
 							        		+"|"+message1
@@ -381,7 +417,7 @@ function fail(error) {
 }
 
 var intervalRefresh = 0;
-function refreshConfig() {
+function refreshConfig(fDone) {
 	if(id != null && checkConnection(false)) {
 		$.ajax({
 			data: {
@@ -390,9 +426,14 @@ function refreshConfig() {
 			}
 		}).done(function(data){
 			setData(data);
+			if(typeof(fDone)=='function') {
+				fDone();
+			}
 		}).fail(function(data) {
 			//failConnection();
 		});
+	} else if(typeof(fDone)=='function') {
+		fDone();
 	}
 }
 
@@ -412,14 +453,10 @@ function checkConnection(showAlert) {
 
 function setData(data) {
 	if(typeof(data.id) == 'undefined') {
-		id = null;
-		name1 = '';
-		name2 = '';
-		set_time = 0;
-		date_start = null;
-		date_end = null;
-		message1 = null;
-		message2 = null;
+		init();
+	} else if(typeof(data.status)!='undefined' && data.status == '9') {
+		alert('effettuato reset');
+		init();
 	} else {
 		id = data.id;
 		if(typeof(data.date_start) != 'undefined') {
@@ -438,7 +475,7 @@ function setData(data) {
 		}
 		if(typeof(data.name1) != 'undefined') name1 = data.name1;
 		if(typeof(data.name2) != 'undefined') name2 = data.name2;
-		if(typeof(data.set_time) != 'undefined') set_time = data.set_time;
+		if(typeof(data.status) != 'undefined') status = data.status;
 		if(typeof(data.message1) != 'undefined') message1 = data.message1;
 		if(typeof(data.message2) != 'undefined') message2 = data.message2;
 	}
@@ -484,17 +521,24 @@ function setColor(col) {
 function doMenu() {
 	if(bConnecting) return;
 	
-	if(id==null) {
-		$("#popupStart").popup("open");
-	} else if(date_end==null) {
-		refreshConfig();
-		if(set_time==0) {
-			$("#menuSetup").parent().parent().parent().show();
-		} else {
-			$("#menuSetup").parent().parent().parent().hide();
+	refreshConfig(function() {
+		if(date_start==null) {
+			$("#popupStart").popup("open");
+		} else if(date_end==null) {
+			$("#menuSetup,#menuStop,#menuMessage,#menuForever").parent().parent().parent().show();
+			$("#menuReset").parent().parent().parent().hide();
+	//		if(status==0) {
+	//			$("#menuSetup").parent().parent().parent().show();
+	//		} else {
+	//			$("#menuSetup").parent().parent().parent().hide();
+	//		}
+			$("#popupMenu").popup("open");
+		} else if(status==0) {
+			$("#menuReset").parent().parent().parent().show();
+			$("#menuSetup,#menuStop,#menuMessage,#menuForever,#menuStart").parent().parent().parent().hide();
+			$("#popupMenu").popup("open");
 		}
-		$("#popupMenu").popup("open");
-	}
+	});
 }
 
 function now() {
@@ -508,4 +552,19 @@ function now() {
 		+' GMT';
 
 	return d.toGMTString();
+}
+
+function init() {
+	id = null;
+	name1 = '';
+	name2 = '';
+	status = 0;
+	date_start = null;
+	date_end = null;
+	message1 = null;
+	message2 = null;
+	$("#years,#months,#days,#hours,#minutes,#seconds").html("00");
+	$("#name1,#name2,#message1,#message2").html("");
+	$("#game table").css("background-image","url(images/heart1.png)");
+
 }
