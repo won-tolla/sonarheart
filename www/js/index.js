@@ -525,17 +525,17 @@ function doMenu() {
 		if(date_start==null) {
 			$("#popupStart").popup("open");
 		} else if(date_end==null) {
-			$("#menuSetup,#menuStop,#menuMessage,#menuForever").parent().parent().parent().show();
-			$("#menuReset").parent().parent().parent().hide();
-	//		if(status==0) {
-	//			$("#menuSetup").parent().parent().parent().show();
-	//		} else {
-	//			$("#menuSetup").parent().parent().parent().hide();
-	//		}
+			if(status==0) {
+				$("#menuSetup,#menuStop,#menuMessage,#menuForever").removeClass("ui-disabled");
+				$("#menuReset").addClass("ui-disabled");
+			} else {
+				$("#menuMessage,#menuStop").removeClass("ui-disabled");
+				$("#menuReset,#menuSetup,#menuForever").addClass("ui-disabled");
+			}
 			$("#popupMenu").popup("open");
 		} else if(status==0) {
-			$("#menuReset").parent().parent().parent().show();
-			$("#menuSetup,#menuStop,#menuMessage,#menuForever,#menuStart").parent().parent().parent().hide();
+			$("#menuReset").removeClass("ui-disabled");
+			$("#menuSetup,#menuStop,#menuMessage,#menuForever,#menuStart").addClass("ui-disabled");
 			$("#popupMenu").popup("open");
 		}
 	});
