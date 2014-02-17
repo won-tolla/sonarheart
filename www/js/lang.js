@@ -31,6 +31,7 @@ var languages = {
 		failConnection: 'Impossibile connetersi alla rete',
 		notEnabled: 'DEMO: funzione none abilitata',
 		forever: "PER SEMPRE?\nQuesta operazione e' irreversibile.",
+		reset: 'Reset?',
 		
 		intro: "SonarHeart conta il nostro tempo."
 			+"<br>Per avviarlo bisogna essere in due."
@@ -76,6 +77,7 @@ var languages = {
 		failConnection: 'Fail connection',
 		notEnabled: 'DEMO: funzione none abilitata',
 		forever: "PER SEMPRE?\nQuesta operazione e' irreversibile.",
+		reset: 'Reset?',
 		
 		intro: "SonarHeart count our time."
 			+"<br>To start you need to be in two."
